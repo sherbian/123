@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="blablabla()">
+    <div id="body">Ничо нет</div>
+    
+    <script>
+        function blablabla() {
+            var text = "";
+            if (navigator.cookieEnabled == true) {
+                let nick = getCookie('nick');
+                if (nick && nick !== 'NULL') {
+                    text = "Авторизован как: " + getCookie('nick');
+                } else {
+                    text = "<button type=\"button\" onclick=\"toLogin()\">войти с трово</button>";
+                }
+            } else {
+                text = "Cookies are not enabled.";
+            }
+            document.getElementById("body").innerHTML = text;
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+        function toLogin() {
+            window.location.replace("https://test.schildt.ru/login.php");
+        }
+    </script>
+</body>
+</html>
